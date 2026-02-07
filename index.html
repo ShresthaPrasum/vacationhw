@@ -22,19 +22,20 @@
       justify-content: center;
       align-items: center;
       font-family: good;
-      background: linear-gradient(45deg,rgb(255, 0, 255),rgb(0, 255, 255));
       min-height: 100vh;
     }
     .container{
-      background-color: white;
+      display: none;
+      background-color: rgba(200, 196, 196, 0.627);
       padding: 40px;
       border-radius: 10px;
-      max-width: 600px;
+      min-width: 35%;
       text-align: center;
 
     }
 
     h1{
+      font-size: 2.5rem;
       color: #ff0000;
       margin-bottom: 25px;
     }
@@ -47,7 +48,7 @@
 
     .stat{
       font-size: 18px;
-      color: #555;
+      color: #000000;
     }
 
     .stat span:last-child{
@@ -74,11 +75,13 @@
       border-radius: 8px;
       cursor: pointer;
       font-size: 40px;
-      transform: all 0.3 ease-in-out;
+      transition: all 0.3s ease-in-out;
+      transform-style: preserve-3d;
+
     }
 
-    .card:hover{
-      transform: scale(1.02);
+    .rotated{
+      transform: rotateY(180deg);
     }
 
     .card.flipped{
@@ -88,10 +91,24 @@
       background-color: greenyellow;
       cursor: default;
     }
+    .card-front,.card-back{
+      position: absolute;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+    }
+    .card-back{
+      transform: rotateY(180deg);
+    }
     .restart-btn{
       padding: 12px 25px;
       font-size: 16px;
-      background-color: #667eea;
+      background-color: #0077ff;
       color: white;
       border: none;
       border-radius: 8px;
@@ -99,11 +116,33 @@
       transition: all 0.3s ease;
     }
     .restart-btn:hover {
-     background: #764ba2;
+     background: #005bb5;
+    }
+
+    .theme{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      font-size: 24px;
+      width: 60%;
+    }
+
+    .theme h1{
+      padding: 20px;
+      background-color: #005bb5;
+      border-radius: 15px;
+      gap: 10px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
+  <div class="theme">
+    <h1 data-theme="emoji">Emoji ❤️</h1>
+    <h1 data-theme="number">Number 🔢</h1>
+    <h1 data-theme="alphabet">Alphabet 🔤</h1>
+  </div>
   <div class="container">
     <h1>Memory Card Game</h1>
 
