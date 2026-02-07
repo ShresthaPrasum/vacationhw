@@ -46,14 +46,31 @@ const theme = {
 
 const themeElements = document.querySelectorAll('.theme h1');
 
-let selectedTheme
+let selectedTheme = 'emoji';
+
 themeElements.forEach(element=>{
     element.addEventListener('click',()=>{
-        let selectedTheme = theme[element.getAttribute('data-theme')]
-        data.shuffledCards = shuffleCards(selectedTheme);
-        console.log(selectedTheme)    
+        selectedTheme = element.getAttribute('data-theme');
+        console.log('Selected theme:', selectedTheme);
+        
+        data.fcard = [];
+        data.matched = [];
+        data.moves = 0;
+        data.matches = 0;
+        
+        data.shuffledCards = shuffleCards();      
+
         document.querySelector('.container').style.display = 'block';
-        document.querySelector('.theme').style.display = 'none';});
+        document.querySelector('.theme').style.display = 'none';    
+
+        const board = document.querySelector('.game-board');
+        board.innerHTML = '';
+        
+        document.querySelector('#moves').innerHTML = '0';
+        document.querySelector('#matches').innerHTML = '0';
+        
+        creatingCard();
+    });
 });
 
 const data = {
@@ -69,7 +86,7 @@ const match = document.querySelector('#matches');
 let isChecking = false;
 
 function shuffleCards() {
-    const shuffledCards = [...selectedTheme].sort(()=> Math.random() - 0.5);
+    const shuffledCards = [...theme[selectedTheme]].sort(()=> Math.random() - 0.5);
     return shuffledCards;
 }
 
@@ -125,7 +142,7 @@ function creatingCard(){
 
                     match.innerHTML = `${data.matches}`;
 
-                    if(data.matched.length === theme.emoji.length){
+                    if(data.matched.length === theme[selectedTheme].length){
                         setTimeout(()=>{
                             alert(`Congratulations! You won the game in ${data.moves} moves!`);
                         },500)
@@ -143,7 +160,7 @@ function creatingCard(){
                         });
                         data.fcard = [];
                         isChecking = false;
-                    },1000)
+                    },600)
                 }
             }
         });
