@@ -18,20 +18,21 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         }
 
         .container {
             background-color: white;
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0px 10px 30px black;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.403);
             max-width: 600px;
             width: 100%;
         }
 
         h1 {
             text-align: center;
-            color: bisque;
+            color: rgb(132, 198, 255);
             margin-bottom: 20px;
             font-size: 2.5rem;
         }
@@ -147,6 +148,11 @@
                 transform: translateY(0);
             }
         }
+        .footer{
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+        }
     </style>
 </head>
 
@@ -179,7 +185,7 @@
             </div>
     
             <div class="item">
-                <h2>Time Left: <span id="time-count">30</span></h2>
+                <h2>Time Left: <span id="time-count">30s</span></h2>
             </div>
         </div>
     
@@ -188,7 +194,9 @@
         </div>
     </div>
 
-
+    <div class="footer">
+        <a href="../../index.html">Back to Home</a>
+    </div>
 
 
     <script src="../script/whackamole.js"></script>

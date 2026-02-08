@@ -75,7 +75,7 @@ function startGame() {
     a = setInterval(() => {
         if(timeLeft > 0){
             timeLeft--;
-            time.innerHTML = timeLeft;
+            time.innerHTML = `${timeLeft}s`;
         }
         else{
             endgame(scoreCount);
