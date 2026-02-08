@@ -1,39 +1,45 @@
 let grid_num = [1,2,3,4,5,6,7,8,null]
 
-const moveCountDis = document.querySelector("#move-count")
+const countdisplay = document.querySelector("#move-count")
 
 const shuffleBtn = document.getElementById('shuffleBtn')
 const resetBtn = document.getElementById('resetBtn')
 
-let moveCount = 0;
+let moveCount = 0
 
+//Used AI FOR THIS FUNCTION, DUE TO UNSOLVABLE PUZZLE, I DID NOT KNOW HOW TO MAKE IT SOLVE IT 
 function shuffle(){
     let emptyIndex = grid_num.indexOf(null)
-
-    for(let i=0;i<150;i++){
-        let j = Math.floor(Math.random()*grid_num.length);
-        let temp = grid_num[i]
-        grid_num[i] = grid_num[j]
-        grid_num[j] = temp
+    
+    for(let i = 0; i < 200; i++){
+        let neighbours = getSurrounding(emptyIndex)
+        let randomNeighbour = neighbours[Math.floor(Math.random() * neighbours.length)]
+        
+        let temp = grid_num[emptyIndex]
+        grid_num[emptyIndex] = grid_num[randomNeighbour]
+        grid_num[randomNeighbour] = temp
+        
+        emptyIndex = randomNeighbour
     }
 }
-shuffle();
 
-function getNeighbours(index){
+shuffle()
+
+function getSurrounding(index){
     let neighbours = []
-    let row = Math.floor(index / 3);
-    let col = index % 3;
+    let row = Math.floor(index / 3)
+    let col = index % 3
     
-    // Up
-    if (row > 0) neighbours.push(index - 3);
-    // Down
-    if (row < 2) neighbours.push(index + 3);
-    // Left
-    if (col > 0) neighbours.push(index - 1);
-    // Right
-    if (col < 2) neighbours.push(index + 1);
     
-    return neighbours;
+    if (row > 0) neighbours.push(index - 3)
+    
+    if (row < 2) neighbours.push(index + 3)
+    
+    if (col > 0) neighbours.push(index - 1)
+    
+    if (col < 2) neighbours.push(index + 1)
+    
+    return neighbours
 
 }
 
@@ -65,15 +71,16 @@ function render(){
     
 function clickHandler(e){
     let i = Number(e.target.getAttribute("data-index"))
+
     let emptyIndex = grid_num.indexOf(null)
 
-    let neighbours = getNeighbours(emptyIndex)
+    let neighbours = getSurrounding(emptyIndex)
 
     if(neighbours.includes(i)){
         swap(emptyIndex, i)
-        moveCount += 1;
-        moveCountDis.innerText = moveCount;
-        checkwin();
+        moveCount += 1
+        countdisplay.innerText = moveCount
+        checkwin()
     }
 }
 
@@ -81,7 +88,7 @@ function swap(i,j){
     let temp = grid_num[i]
     grid_num[i] = grid_num[j]
     grid_num[j] = temp
-    updateUI()
+    updateBoard()
 }
 
 function checkwin(){
@@ -95,30 +102,30 @@ function checkwin(){
     if(isWon && grid_num[8] === null){
         setTimeout(function(){
             alert("Congratulations! You solved the puzzle in "+moveCount+" moves.")
-            moveCount = 0;
-            moveCountDis.innerText = moveCount;
-            shuffle();
-            updateUI();
-        }, 500);
+            moveCount = 0
+            countdisplay.innerText = moveCount
+            shuffle()
+            updateBoard()
+        }, 500)
     }
 
 }
 
 resetBtn.addEventListener('click', function(){
     grid_num = [1, 2, 3, 4, 5, 6, 7, 8, null]
-    moveCount = 0;
-    document.querySelector("#move-count").innerText = moveCount;
-    updateUI()
-});
+    moveCount = 0
+    countdisplay.innerText = moveCount
+    updateBoard()
+})
 
 shuffleBtn.addEventListener('click', function(){
-    shuffle();
-    moveCount = 0;
-    document.querySelector("#move-count").innerText = moveCount;
-    updateUI()
-});
+    shuffle()
+    moveCount = 0
+    countdisplay.innerText = moveCount
+    updateBoard()
+})
 
-function updateUI(){
+function updateBoard(){
     let container = document.querySelector(".puzzle-grid")
     container.innerHTML = ""
     render()
