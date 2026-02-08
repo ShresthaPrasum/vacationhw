@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider Puzzle</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+        }
+
+        .container{
+            text-align: center;
+            background-color: wheat;
+            padding: 40px;
+            border-radius: 15px;
+        }
+
+        .header h1{
+            font-size: 32px;
+            color: brown;
+            margin-bottom: 20px;
+        }
+
+        .move-count{
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: rgb(0, 0, 0);
+        }
+
+        .puzzle-grid{
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            justify-content: center;
+            margin-bottom: 20px;
+            width: max-content;
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .tile{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(0, 255, 255, 0.519);
+            border-radius: 15px;
+            color: wheat;
+            transition: all 0.3 ease;
+            cursor: pointer;
+        }
+
+        .empty-tile{
+            background-color: transparent;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .controls{
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        button{
+            padding: 12px 25px;
+            font-size: 15px;
+            background-color: burlywood;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover{
+            transform: scale(1.05);
+        }
+
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Slider Puzzle</h1>
+            <div class="move-count">
+                Moves:<span id="move-count">0</span> 
+            </div>
+        </div>
+
+        <div class="puzzle-grid">
+
+        </div>
+
+        <div class="controls">
+            <button id="resetBtn">
+                Reset Game
+            </button>
+
+            <button id="shuffleBtn">
+                Shuffle
+            </button>
+        </div>
+    </div>
+    <script src="puzzle.js"></script>
+</body>
+</html>
